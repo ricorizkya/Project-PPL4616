@@ -1,3 +1,15 @@
+<?php
+	session_start();
+	if (isset($_SESSION['is_login'])) {
+		include "header1.php";
+		//header('login.php');
+		//exit();
+	  }else{
+		include "header.php";
+		//exit();
+	  } 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +41,6 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-  <?php include 'header.php'; ?>
     <!-- END nav -->
 		
 	<div class="hero-wrap hero-bread" style="background-image: url('images/header2.jfif');">

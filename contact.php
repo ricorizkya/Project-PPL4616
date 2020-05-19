@@ -1,3 +1,27 @@
+<?php
+	session_start();
+	if (isset($_SESSION['is_login'])) {
+		include "header1.php";
+		//header('login.php');
+		//exit();
+	  }else{
+		include "header.php";
+		//exit();
+    }
+    
+    include 'koneksi.php';
+
+    if(isset($_POST['submit_message'])){
+      $nama = $_POST['name'];
+      $email = $_POST['email'];
+      $subject = $_POST['subject'];
+      $main = $_POST['main'];
+
+      $sql = mysqli_query($koneksi, "INSERT INTO testimoni VALUES ('','$nama','$email','$subject','$main')");
+      header("location: contact.php");
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +53,6 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-  <?php include 'header.php'; ?>
     <!-- END nav -->
 		
 		<div class="hero-wrap hero-bread" style="background-image: url('images/header2.jfif');">
@@ -77,23 +100,23 @@
             	<div class="row">
             		<div class="col-md-6">
 	                <div class="form-group">
-	                  <input type="text" class="form-control" name="name_message" placeholder="Name" autocomplete="off" required>
+	                  <input type="text" class="form-control" name="name" placeholder="Name" autocomplete="off" required>
 	                </div>
                 </div>
                 <div class="col-md-6">
 	                <div class="form-group">
-	                  <input type="email" class="form-control" name="email_message" placeholder="Email" autocomplete="off" required>
+	                  <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required>
 	                </div>
 	                </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject_message" placeholder="Subject" autocomplete="off" required>
+                <input type="text" class="form-control" name="subject" placeholder="Subject" autocomplete="off" required>
               </div>
               <div class="form-group">
-                <textarea id="" cols="30" rows="7" class="form-control" name="main_message" placeholder="Message" autocomplete="off" required></textarea>
+                <textarea id="" cols="30" rows="7" class="form-control" name="main" placeholder="Message" autocomplete="off" required></textarea>
               </div>
               <div class="form-group">
-                <input type="submit" name="submit_message" value="Kirim Pesan" class="btn btn-primary py-3 px-5">
+                <input type="submit" name="submit_message" value="Send Message" class="btn btn-primary py-3 px-5">
               </div>
             </form>
           </div>

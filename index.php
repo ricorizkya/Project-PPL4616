@@ -1,3 +1,15 @@
+<?php
+	session_start();
+	if (isset($_SESSION['is_login'])) {
+		include "header1.php";
+		//header('login.php');
+		//exit();
+	  }else{
+		include "header.php";
+		//exit();
+	  } 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +41,6 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-  <?php include 'header.php';?>
     <!-- END nav -->
 		
 		<div class="hero-wrap js-fullheight" style="background-image: url('images/header.jfif');">
@@ -66,7 +77,7 @@
     				<div class="product-slider owl-carousel ftco-animate">
     					<div class="item">
 		    				<div class="product">
-		    					<a href="#" class="img-prod"><img class="img-fluid" src="images/popular1.jpg"></a>
+		    					<a href="travel.php" class="img-prod"><img class="img-fluid" src="images/popular1.jpg"></a>
 		    					<div class="text pt-3 px-3">
 		    						<h3><a href="#">Merbabu 3142 MASL</a></h3>
 									<p>Merbabu is a dormant stratovolcano in Central Java province on the Indonesian island of Java. 
@@ -77,7 +88,7 @@
 	    				</div>
 	    				<div class="item">
 		    				<div class="product">
-		    					<a href="#" class="img-prod"><img class="img-fluid" src="images/popular2.jpg"></a>
+		    					<a href="travel.php" class="img-prod"><img class="img-fluid" src="images/popular2.jpg"></a>
 		    					<div class="text pt-3 px-3">
 		    						<h3><a href="#">Sumbing 3371 MASL</a></h3>
 		    						<p>Sumbing is an active stratovolcano in Central Java, Indonesia, symmetrical with Sundoro. 
@@ -87,7 +98,7 @@
 	    				</div>
 	    				<div class="item">
 		    				<div class="product">
-		    					<a href="#" class="img-prod"><img class="img-fluid" src="images/popular3.jpg" ></a>
+		    					<a href="travel.php" class="img-prod"><img class="img-fluid" src="images/popular3.jpg" ></a>
 		    					<div class="text pt-3 px-3">
 		    						<h3><a href="#">Semeru 3676 MASL</a></h3>
 		    						<p>Semeru is an active volcano in East Java, Indonesia. It is located in the subduction zone, 
@@ -98,7 +109,7 @@
 	    				</div>
 	    				<div class="item">
 		    				<div class="product">
-		    					<a href="#" class="img-prod"><img class="img-fluid" src="images/popular4.jpg"></a>
+		    					<a href="travel.php" class="img-prod"><img class="img-fluid" src="images/popular4.jpg"></a>
 		    					<div class="text pt-3 px-3">
 		    						<h3><a href="#">Rinjani 3726 MASL</a></h3>
 		    						<p> is an active volcano in Indonesia on the island of Lombok. 
@@ -147,41 +158,21 @@
     		<div class="row">
     			<div class="col-sm col-md-6 col-lg ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/logo1.png"></a>
+    					<a href="travel.php" class="img-prod"><img class="img-fluid" src="images/logo1.png"></a>
     					<div class="text py-3 px-3">
-    						<h3><a href="#">Kelompok Satu</a></h3>
+    						<h3><a href="travel.php">Kelompok Satu</a></h3>
 	    					<hr>
-							<p>Kelompok Satu adalah perusahaan yang bergerak di bidang jasa yang menyediakan beberapa penawaran menarik di bidang pendakian. </p>
+							<p>Kelompok Satu is a company engaged in services that provides several attractive offers in the field of climbing.</p>
     					</div>
     				</div>
     			</div>
     			<div class="col-sm col-md-6 col-lg ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/partner2.jpg"></a>
+    					<a href="travel.php" class="img-prod"><img class="img-fluid" src="images/partner3.jpg"></a>
     					<div class="text py-3 px-3">
-    						<h3><a href="#">Rico Eka Rizkya</a></h3>
+    						<h3><a href="travel.php">Sunrise Adventure Consultant</a></h3>
 	    					<hr>
-							<p>Rico adalah pendaki yang memiliki sertifikat nasional dari APGI dan sertifikat internasional dari IMGA.</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/partner3.jpg"></a>
-    					<div class="text py-3 px-3">
-    						<h3><a href="#">Sunrise Adventure Consultant</a></h3>
-	    					<hr>
-							<p>Sunrise Adventure Consultant adalah perusahaan yang bergerak di bidang jasa. Kiprahnya dalam dunia pendakian sudah lama dan sering mendapatkan client dari negara lain.</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/partner4.png"></a>
-    					<div class="text py-3 px-3">
-    						<h3><a href="#">Ara Adventure</a></h3>
-	    					<hr>
-							<p>Ara Adventure merupakan perusahaan baru yang bergerak di bidang jasa. Meskipun baru, Ara Adventure memiliki tour guide yang bersertifikat nasional.</p>
+							<p>Sunrise Adventure Consultant is a company engaged in the service sector. Its work in the climbing world has long and often get clients from other countries.</p>
     					</div>
     				</div>
     			</div>

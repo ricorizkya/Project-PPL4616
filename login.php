@@ -1,17 +1,46 @@
+<?php
+  session_start();
+  include 'koneksi.php';
+  include 'functions.php';
+  include 'header.php';
+
+  if (isset($_SESSION['is_login'])) {
+    header('location: index.php');
+  }
+
+  if (isset($_COOKIE['username'])) {
+    relogin($_COOKIE['username']);
+    header('location: index.php');
+  }
+
+  if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if (isset($_POST['remember'])) {
+      $remember = true;
+    }else{
+      $remember = false;
+    }
+    if (login($username, $password, $remember)) {
+      header('location: index.php');
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>LUPIN</title>
-	<link href="images/logo.png" rel="shortcut icon">
+	  <link href="images/logo.png" rel="shortcut icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -23,15 +52,14 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-  <?php include 'header.php'; ?>
     <!-- END nav -->
-	<section>	
+	<section>
     <div class="hero-wrap js-fullheight" style="background-image: url('images/header3.jfif');">
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -49,7 +77,7 @@
         </div>
       </div>
     </div>
-    </section>
+  </section>
     <div class="goto-here"></div>
     <section class="ftco-section contact-section">
       <center>
@@ -58,12 +86,12 @@
             <form action="" method="POST" class="contact-form">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="username_member" placeholder="Username" autocomplete="off" required>
+                    <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="password" class="form-control" name="password_member" placeholder="Password" autocomplete="off" required>
+                    <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" required>
                   </div>
                 </div>
               <div class="form-group">
@@ -72,6 +100,12 @@
               <div>
                 <input type="checkbox" name="remember" value="remember-me"> Remember Me
               </div>
+              <?php
+                if (isset($_SESSION['message'])) {
+                  echo $_SESSION['message'];
+                }
+                unset($_SESSION['message']);
+              ?>
             </form>
             <p>Don't have any account? <a href="register.php">Register</a></p>
           </div>
@@ -98,6 +132,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+
   </body>
 </html>
