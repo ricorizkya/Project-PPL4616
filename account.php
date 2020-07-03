@@ -73,7 +73,7 @@
                     <p style="text-align: left;"><b><h4>Personal Data</h4></b></p>
                     <?php
                     $id = $_SESSION['username'];
-                    $profil = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$id'");
+                    $profil = mysqli_query($koneksi,"SELECT * FROM users WHERE username='$id'");
                     while($d = mysqli_fetch_array($profil)){
                     ?>
                     <div class="container">
@@ -82,7 +82,7 @@
                           <b>Name </b>
                         </div>
                         <div class="col-sm">
-                          <?php echo $d['nama_depan'];?> <?php echo $d['nama_belakang'];?>
+                          <?php echo $d['nama'];?>
                         </div>
                       </div>
                       <div class="row">
@@ -98,7 +98,7 @@
                           <b>Phone</b>
                         </div>
                         <div class="col-sm">
-                          <?php echo $d['telepon'];?>
+                          <?php echo $d['no_hp'];?>
                         </div>
                       </div>
                       <div class="row">

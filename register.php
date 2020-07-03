@@ -1,23 +1,26 @@
 <?php
   include 'koneksi.php';
 
-  if (isset($_POST['submit_register'])) { 
+  if (isset($_POST['submit_register'])) {
     $nama_depan = $_POST['nama_depan'];
-    $nama_belakang = $_POST['nama_belakang'];
     $email = $_POST['email'];
     $phone_member = $_POST['phone_member'];
     $street_member = $_POST['address'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $token=hash('sha256', md5(date('Y-m-d'))) ;
 
-    $user_check_query = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
-    $result = mysqli_query($connection, $user_check_query);
+    $user_check_query = "SELECT * FROM users WHERE email='".$email."'";
+    $result = mysqli_query($koneksi, $user_check_query);
+    $cek = mysqli_num_rows($result);
     $message = "Username already taken";
-    if (mysqli_num_rows($result)>0) { // if user exists
-      echo "<script type='text/javascript'>alert('$message');</script>"; 
+    if ($cek>0) { // if user exists
+      echo "<script type='text/javascript'>alert('$message');</script>";
       }else{
-        if (mysqli_query($koneksi, "INSERT INTO user VALUES ('','$nama_depan','$nama_belakang','$phone_member','$email','$street_member','$username','$password')")) {
-          header('location: login.php');
+        $insert = mysqli_query($koneksi, "INSERT INTO users VALUES ('','$username','$password','$nama_depan','$email','$phone_member','$street_member','$token','0')");
+        include("mail.php");
+        if($insert) {
+          echo '<script>alert("Registration successful. Please check the email for verification.")</script>';
         }
       }
   }
@@ -28,16 +31,16 @@
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>LUPIN</title>
     <link href="images/logo.png" rel="shortcut icon">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" type="text/css" href="owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -50,7 +53,7 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -72,7 +75,7 @@
   <?php include "header.php"; ?>
     <!-- END nav -->
 
-    <section>	
+    <section>
     <div class="hero-wrap js-fullheight" style="background-image: url('images/header3.jfif');">
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -99,16 +102,11 @@
             <div class="col-md-6 ftco-animate">
             <form action="" method="POST" class="contact-form" enctype="multipart/form-data">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" name="nama_depan" placeholder="First Name" autocomplete="off" required>
+                    <input type="text" class="form-control" name="nama_depan" placeholder="Name" autocomplete="off" required>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="nama_belakang" placeholder="Last Name" autocomplete="off" required>
-                  </div>
-                  </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
@@ -134,7 +132,7 @@
                   <div class="form-group">
                     <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required>
                   </div>
-                </div> 
+                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" required>
@@ -170,6 +168,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+
   </body>
 </html>

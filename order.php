@@ -90,7 +90,7 @@
                     <p style="text-align: left;"><b>Personal Data</b></p>
                     <?php
                     $id = $_SESSION['username'];
-                    $profil = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$id'");
+                    $profil = mysqli_query($koneksi,"SELECT * FROM users WHERE username='$id'");
                     while($d = mysqli_fetch_array($profil)){
                     ?>
                     <div class="container" style="text-align: left;">
@@ -99,7 +99,8 @@
                           <b>Name </b>
                         </div>
                         <div class="col-sm">
-                          <?php echo $d['nama_depan'];?> <?php echo $d['nama_belakang'];?>
+                          <?php echo $d['nama'];?>
+                          <input type="hidden" name="username" value="<?php echo $d['username']; ?>">
                         </div>
                       </div>
                       <div class="row">
@@ -108,6 +109,7 @@
                         </div>
                         <div class="col-sm">
                           <?php echo $d['email'];?>
+                          <input type="hidden" name="email" value="<?php echo $d['email']; ?>">
                         </div>
                       </div>
                       <div class="row">
@@ -115,7 +117,8 @@
                           <b>Phone</b>
                         </div>
                         <div class="col-sm">
-                          <?php echo $d['telepon'];?>
+                          <?php echo $d['no_hp'];?>
+                          <input type="hidden" name="phone" value="<?php echo $d['no_hp']; ?>">
                         </div>
                       </div>
                       <div class="row">
@@ -124,10 +127,11 @@
                         </div>
                         <div class="col-sm">
                           <?php echo $d['alamat'];?>
+                          <input type="hidden" name="alamat" value="<?php echo $d['alamat']; ?>">
                         </div>
                       </div>
                     </div>
-                    <input type="hidden" name="id" value="<?php echo $d['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $d['id_users']; ?>">
                     <input type="hidden" name="username" value="<?php echo $d['username']; ?>">
                     <?php } ?><br><br>
 

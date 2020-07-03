@@ -1,13 +1,113 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
 include 'koneksi.php';
+
+$id = $_GET['id'];
+$sql = "SELECT * FROM checkout WHERE id=$id";
+$query = mysqli_query($koneksi, $sql);
 
   if(isset($_POST['submit'])){
     $id       = $_POST['id'];
+    $username = $_POST['user'];
+    $email    = $_POST['email_member'];
+    $phone    = $_POST['phone_member'];
+    $tanggal  = $_POST['tgl'];
+    $mitra    = $_POST['mitra'];
+    $gunung   = $_POST['gunung'];
+    $durasi   = $_POST['durasi'];
+    $harga    = $_POST['harga'];
     $guide    = $_POST['guide'];
     $status   = $_POST['status'];
     $note     = $_POST['note'];
     $sql = "UPDATE checkout SET guide='$guide', status='$status', note='$note' WHERE id='$id'";
     if(mysqli_query($koneksi, $sql)){
+
+      $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+      try {
+          //Server settings
+          $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+          $mail->isSMTP();                                      // Set mailer to use SMTP
+          $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+          $mail->SMTPAuth = true;                               // Enable SMTP authentication
+          $mail->Username = 'gilangakbar120596@gmail.com';                 // SMTP username
+          $mail->Password = '18november99';                           // SMTP password
+          $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+          $mail->Port = 465;                                    // TCP port to connect to
+
+          //Recipients
+          $mail->setFrom('gilangakbar120596@gmail.com', 'LUPIN');
+          $mail->addAddress($email, $username);     // Add a recipient
+          //$mail->addAddress('ellen@example.com');               // Name is optional
+          //$mail->addReplyTo('info@example.com', 'Information');
+          //$mail->addCC('cc@example.com');
+          //$mail->addBCC('bcc@example.com');
+
+          //Attachments
+          //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+          //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+          //$id = $_GET['id'];
+          //$sql = "SELECT * FROM checkout WHERE id=$id";
+          //$query = mysqli_query($koneksi, $sql);
+          //while($d = mysqli_fetch_assoc($query)){
+
+          //}
+          //Content
+          $mail->isHTML(true);                                  // Set email format to HTML
+          $mail->Subject = 'Order Detail';
+          $mail->Body    = '
+          <h3>Order Detail</h3>
+          <table>
+              <tr>
+                  <td>Name</td>
+                  <td> : </td>
+                  <td>'.$username.'</td>
+              </tr>
+              <tr>
+                  <td>Phone</td>
+                  <td> : </td>
+                  <td>'.$phone.'</td>
+              </tr>
+              <tr>
+                  <td>Package</td>
+                  <td> : </td>
+                  <td>'.$gunung.'  '.$durasi.'</td>
+              </tr>
+              <tr>
+                  <td>Partner</td>
+                  <td> : </td>
+                  <td>'.$mitra.'</td>
+              </tr>
+              <tr>
+                  <td>Price</td>
+                  <td> : </td>
+                  <td>$'.$harga.'.0</td>
+              </tr>
+              <tr>
+                  <td>Guide</td>
+                  <td> : </td>
+                  <td>'.$guide.'</td>
+              </tr>
+              <tr>
+                  <td>Date</td>
+                  <td> : </td>
+                  <td>'.$tanggal.'</td>
+              </tr>
+              <tr>
+                  <td>Status</td>
+                  <td> : </td>
+                  <td><b>'.$status.'</b></td>
+              </tr>
+          </table>
+      ';
+          $mail->AltBody = 'LUPIN ADVENTURE';
+
+          $mail->send();
+          echo '<script>alert("Message has be sent")</script>';
+      } catch (Exception $e) {
+          echo '<script>alert("Message could not be sent. Mailer Error: ")</script>', $mail->ErrorInfo;
+    }
       header("location: halaman_order_mitra.php");
     }else{
       echo "ERROR, Data gagal diupdate".mysqli_error();
@@ -78,9 +178,7 @@ include 'koneksi.php';
     header("halaman_admin.php");
   }
 
-  $id = $_GET['id'];
-  $sql = "SELECT * FROM checkout WHERE id=$id";
-  $query = mysqli_query($koneksi, $sql);
+
   while($d = mysqli_fetch_assoc($query)){
 ?>
     <h3><b>Handle Order</b></h3>
@@ -90,6 +188,8 @@ include 'koneksi.php';
             <b>Nama User</b><br>
             <input type="hidden" name="id" value="<?php echo $d['id']; ?>">
             <input type="hidden" name="user" value="<?php echo $d['username']; ?>">
+            <input type="hidden" name="email_member" value="<?php echo $d['email_member']; ?>">
+            <input type="hidden" name="phone_member" value="<?php echo $d['phone_member']; ?>">
             <?php echo $d['username']; ?>
         </div>
         <div class="col-sm-4">
@@ -108,6 +208,7 @@ include 'koneksi.php';
             <b>Nama Paket</b><br>
             <input type="hidden" name="gunung" value="<?php echo $d['nama_gunung']; ?>">
             <input type="hidden" name="durasi" value="<?php echo $d['durasi']; ?>">
+            <input type="hidden" name="harga" value="<?php echo $d['harga']; ?>">
             <?php echo $d['nama_gunung']; ?> <?php echo $d['durasi']; ?>
         </div>
     </div>
