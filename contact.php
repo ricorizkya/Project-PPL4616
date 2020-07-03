@@ -8,7 +8,7 @@
 		include "header.php";
 		//exit();
     }
-    
+
     include 'koneksi.php';
 
     if(isset($_POST['submit_message'])){
@@ -29,13 +29,13 @@
 	<link href="images/logo.png" rel="shortcut icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -47,14 +47,14 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <!-- END nav -->
-		
+
 		<div class="hero-wrap hero-bread" style="background-image: url('images/header2.jfif');">
       <div class="container">
       <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -110,7 +110,7 @@
 	                </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" placeholder="Subject" autocomplete="off" required>
+                <input type="text" class="form-control" name="subject" placeholder="Status" autocomplete="off" required>
               </div>
               <div class="form-group">
                 <textarea id="" cols="30" rows="7" class="form-control" name="main" placeholder="Message" autocomplete="off" required></textarea>
@@ -143,6 +143,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+
   </body>
 </html>

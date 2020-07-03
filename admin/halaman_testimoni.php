@@ -8,16 +8,16 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<?php 
+	<?php
 	session_start();
- 
+
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['level']==""){
 		header("location:index.php?pesan=gagal");
 	}
- 
+
 	?>
-    
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Halaman Admin</a>
@@ -46,16 +46,16 @@
     </div>
     </nav><br>
     <!-- End Nav -->
-    
+
     <h3>Halo <b><?php echo $_SESSION['username']; ?></b> Anda telah login sebagai <b><?php echo $_SESSION['level']; ?></b>.</h3><br>
-    
+
     <table class="table">
   <thead class="thead-light">
     <tr>
       <th scope="col">No</th>
       <th scope="col">Nama</th>
       <th scope="col">Email</th>
-      <th scope="col">Subjek</th>
+      <th scope="col">Status</th>
       <th scope="col">Pesan</th>
     </tr>
   </thead>

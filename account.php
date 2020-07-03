@@ -139,10 +139,12 @@
                       <?php
                           $id = $_SESSION['username'];
                           $data = mysqli_query($koneksi, "SELECT * FROM checkout WHERE username='$id'");
-                          $no=1;
-                          while($e = mysqli_fetch_array($data)){
                       ?>
                       <tbody>
+                      <?php
+                          $no=1;
+                          while($e = mysqli_fetch_array($data)){
+                        ?>
                         <tr>
                           <th scope="row"><?php echo $no ?></th>
                           <th scope="row"><?php echo $e['tanggal']; ?></th>
@@ -153,9 +155,9 @@
                           <th scope="row"><?php echo $e['status']; ?></th>
                           <th scope="row"><?php echo $e['note']; ?></th>
                         </tr>
+                    <?php $no++; } ?>
                       </tbody>
                       </table>
-                    <?php $no++; } ?>
                   </div>
                 </div>
               </div>

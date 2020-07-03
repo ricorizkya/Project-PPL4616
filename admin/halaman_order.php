@@ -60,7 +60,6 @@
       <th scope="col">Guides</th>
       <th scope="col">Status</th>
       <th scope="col">Catatan</th>
-      <th scope="col">Aksi</th>
     </tr>
   </thead>
   <?php
@@ -79,9 +78,6 @@
       <td><?php echo $d['guide']; ?></td>
       <td><?php echo $d['status']; ?></td>
       <td><?php echo $d['note']; ?></td>
-      <td>
-        <a href="handle.php?id=<?php echo $d['id']; ?>" class="btn btn-success">Handle</a>
-      </td>
     </tr>
   </tbody>
         <?php $no++; } ?>
